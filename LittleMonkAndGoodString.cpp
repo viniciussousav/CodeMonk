@@ -3,32 +3,35 @@
 using namespace std;
 #include <vector>
 
-bool isGoodString(string word){
-    for(int i = 0; i < word.length(); i++) {
-        if((word[i] != 'a'|| word[i] != 'e'|| word[i] != 'i' || word[i] != 'o'|| word[i] != 'u') && word[i] != ' ' )
-            return false;
+int goodString(string word){
+    int i = 0;
+    int f = 0;
+    int result = 0;
+    while(f < word.length()){
+        if (word[i] == 'a' || word[i] == 'e' || word[i] == 'i' || word[i] == 'o' ||word[i] == 'u'){
+            if (word[f] == 'a' || word[f] == 'e' || word[f] == 'i' || word[f] == 'o' ||word[f] == 'u'){
+                if((f - i + 1) > result){
+                    result = f - i + 1;
+                }
+                f = f + 1; 
+            } else {
+                i = f;
+                
+            }
+        } else {
+            i = i + 1;
+            f = f + 1;
+        }
     }
-    return true;
+
+    return result;
 }
 
 int main(){
     string s;
     cin >> s;
     int result = 0;
-    vector<string> goodStrings;
-
-    for (int i = 0; i < s.length(); i++)
-    {
-        for (int j = i; j < s.length(); j++)
-        {
-            string test = s.substr(i, j-i+1);
-            cout << test << endl;
-            if(isGoodString(test)){
-                goodStrings.push_back(test);
-                result+=1;
-            }
-        }        
-    }
-    cout << result << endl;
+    
+    cout << goodString(s) << endl;
     return 0;
 }
