@@ -4,31 +4,31 @@
 using namespace std;
 
 int main(){
+    
     int t;
     cin >> t;
-
-    for (int i = 0; i < t; i++)
-    {
+    for (int k = 0; k < t; k++){
         int n;
         cin >> n;
-
         int M[n][n];
-
-        for (int j = 0; j < n*n; j++)
-        {
-            cin >> M[j/n][j%n];
+        int result = 0;
+        for (int i = 0; i < n*n; i++){
+            cin >> M[i/n][i%n];
         }
 
+        for (int l = 0; l < n*n; l++){
+            int i = l/n;
+            int j = l%n;
 
-        for (int j = 0; j < n*n; j++)
-        {
-            if(j%n == n-1)
-                cout << M[j/n][j%n] << endl;
-            else 
-                cout << M[j/n][j%n] << " ";
+            for (int p = i; p < n; p++){
+                for (int q = j; q < n; q++){
+                    if(M[i][j] > M[p][q]){
+                        result += 1;
+                    }
+                }
+            }
         }
-        
+      
+        cout << result << endl;
     }
-    
-
 }
